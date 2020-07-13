@@ -2,6 +2,7 @@
 let list = []; 
 loadlist();
 showlist();
+//Оброботчик кнопки
 document.getElementById('sub').onclick = function(){
     let firstName = document.querySelector('#Firstname').value;
     let lastName = document.querySelector('#Lastname').value;
@@ -26,16 +27,16 @@ document.getElementById('sub').onclick = function(){
     alert('Поля не заполнены!')
 }
 }
-
+// сохраняю в localstorage
 function savelist(){
     localStorage.setItem('list', JSON.stringify(list));
 }
-
+// беру из localstorage
 function loadlist(){
     if (localStorage.getItem('list')) list = JSON.parse(localStorage.getItem('list'));
     showlist();
 }
-
+// Рендер таблицы 
 function showlist(){
     let commentField = document.getElementById('table');
     let out = '';
@@ -58,7 +59,7 @@ for(let i in list){
     $('.remove').on('click', deleteComment);
 }
    
-
+// удаление записи
 function deleteComment(){
     let id = $(this).attr('data-art');
     list.splice(id,1);
@@ -66,6 +67,7 @@ function deleteComment(){
     showlist()
 }
 
+// сортировка по фамилии
 document.getElementById('sortN').onclick = function(){
     loadlist()
     if($('#sortN').val()=='1'){
@@ -90,6 +92,7 @@ document.getElementById('sortN').onclick = function(){
     showlist()
 }
 
+// сортировка по году рождения
 document.getElementById('sortY').onclick = function(){
     loadlist()
     if($('#sortY').val()=='1'){
@@ -102,6 +105,8 @@ document.getElementById('sortY').onclick = function(){
     showlist()
 }
 
+// Выгрузка файла в json
+
 document.getElementById("download").onclick = function writeFile(name, value) {
     var val = value;
     if (value === undefined) {
@@ -112,5 +117,5 @@ document.getElementById("download").onclick = function writeFile(name, value) {
     download.download = name;
 
     
-    writeFile("Data.txt", JSON.stringify(list));
+    writeFile("Data.json", JSON.stringify(list)); // если надо txt то вместо *.json написать *.txt
 }
