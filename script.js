@@ -105,7 +105,7 @@ document.getElementById('sortY').onclick = function(){
     showlist()
 }
 
-// Выгрузка файла в json
+// Выгрузка данных в json
 
 document.getElementById("download").onclick = function writeFile(name, value) {
     var val = value;
